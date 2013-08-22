@@ -50,7 +50,7 @@ class RaptorConfig {
 	 * Charge le fichier de configuration du workspace
 	 */
 	public function loadWorkspaceConfig () {
-		if (file_exist ($file = WORKSPACE_PATH.'config.php')) {
+		if (file_exists ($file = WORKSPACE_PATH.'config.php')) {
 			require_once ($file);
 		}
 	}
