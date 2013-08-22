@@ -47,6 +47,15 @@ class RaptorConfig {
 	}
 	
 	/**
+	 * Charge le fichier de configuration du workspace
+	 */
+	public static function loadWorkspaceConfig () {
+		if (file_exist ($file = WORKSPACE_PATH.'config.php')) {
+			require_once ($file);
+		}
+	}
+	
+	/**
 	 * Renvoie la config spécial pour le JS
 	 * @param bool $isEditor
 	 * @return array

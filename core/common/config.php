@@ -21,3 +21,5 @@ $config->arConnection = array (
 );
 
 $config->defaultConnection = 'raptor';
+
+RaptorConfig::loadWorkspaceConfig ();

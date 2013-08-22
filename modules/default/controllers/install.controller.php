@@ -13,7 +13,7 @@ class InstallActionController extends RaptorActionController {
 		
 		$ppo->installOk = _iOClass('RaptorInstall')->install ();
 		
-		return _arSmarty($ppo, 'install/default.tpl');
+		return _arSmarty($ppo, 'default|install/default.tpl');
 	}
 		
 }
