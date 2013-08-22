@@ -49,7 +49,7 @@ class RaptorConfig {
 	/**
 	 * Charge le fichier de configuration du workspace
 	 */
-	public static function loadWorkspaceConfig () {
+	public function loadWorkspaceConfig () {
 		if (file_exist ($file = WORKSPACE_PATH.'config.php')) {
 			require_once ($file);
 		}
@@ -109,20 +109,6 @@ class RaptorConfig {
 	 */
 	public $MODE = 'PROD';
 	
-	/**
-	 * Liste des raccourcis de l'editor
-	 */
-	public $LIST_EDIT_SHORTCUT = array (
-		'menu.file' => array ('Alt', 'F'),
-		'menu.file.new'    => array ('Ctrl', 'N'),
-		'menu.file.open'   => array ('Ctrl', 'O'),
-		'menu.file.save'   => array ('Ctrl', 'S'),
-		'menu.file.saveto' => array ('Ctrl', 'Shift', 'S'),
-		'menu.file.import' => array ('Ctrl', 'I'),
-		
-		'menu.edit' => array ('Alt', 'E'),
-	);
-
 	/**
 	 * Page d'accueil - format : module|controler|action
 	 * @var string
