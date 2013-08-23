@@ -20,7 +20,7 @@ class DefaultActionController extends RaptorActionController {
 	 */
 	public function processWelcome () {
 		$ppo = new RaptorPPO ();
-		return _arSmarty($ppo, 'default/default|welcome.tpl');
+		return _arSmarty($ppo, 'default|default/welcome.tpl');
 	}
 	
 	/**

@@ -1,4 +1,7 @@
 <?php
+
+require_once (LIBS_PATH.'Firephp/fb.php');
+
 /**
  * Class PHP permettant de gérer les logs
  */
@@ -15,7 +18,6 @@ class RaptorLog {
 	static private function _initialise () {
 		if (!self::$_init) {
 			self::$_init =  true;
-			require_once (LIBS_PATH.'Firephp/fb.php');
 		}
 	}
 	
@@ -32,7 +34,9 @@ class RaptorLog {
 	 * @param string $label
 	 */
 	public function info ($objet, $label = '') {
-		return FB::info ($objet, $label);
+		if (RaptorConfig::getInstance()->MODE == RaptorConfig::MODE_DEV) {
+			FB::info ($objet, $label);
+		}
 	}
 	
 	/**
@@ -41,7 +45,7 @@ class RaptorLog {
 	 * @param string $label
 	 */
 	public function log ($objet, $label = '') {
-		return FB::log ($objet, $label);
+		FB::log ($objet, $label);
 	}
 	
 	/**
@@ -50,7 +54,7 @@ class RaptorLog {
 	 * @param string $label
 	 */
 	public function warn ($objet, $label = '') {
-		return FB::warn ($objet, $label);
+		FB::warn ($objet, $label);
 	}
 	
 	/**
@@ -59,6 +63,6 @@ class RaptorLog {
 	 * @param string $label
 	 */
 	public function error ($objet, $label = '') {
-		return FB::error ($objet, $label);
+		FB::error ($objet, $label);
 	}
 }

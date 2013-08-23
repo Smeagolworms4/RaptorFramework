@@ -4,6 +4,9 @@
  * 
  */
 class RaptorConfig {
+
+	const MODE_DEV = 'DEV';
+	const MODE_PROD = 'PROD';
 	
 	/**
 	 * L'instance
@@ -107,7 +110,7 @@ class RaptorConfig {
 	 * Mode production (DEV/PROD)
 	 * @var unknown_type
 	 */
-	public $MODE = 'PROD';
+	public $MODE = self::MODE_DEV;
 	
 	/**
 	 * Page d'accueil - format : module|controler|action

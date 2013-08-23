@@ -6,6 +6,12 @@
 class RaptorController {
 
 	/**
+	 * L'instance
+	 * @var RaptorController
+	 */
+	private static $_instance = null;
+	
+	/**
 	 * @var string
 	 */
 	private $_module;
@@ -20,9 +26,20 @@ class RaptorController {
 	private $_action;
 	
 	/**
+	 * Retoune l'instance
+	 * @return RaptorController
+	 */
+	public static function getInstance () {
+		if (self::$_instance == null) {
+			self::$_instance = new RaptorController ();
+		}
+		return self::$_instance;
+	}
+	
+	/**
 	 * Constructeur
 	 */
-	public function __construct () {
+	private function __construct () {
 		
 		$target = str_replace ($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
 		
@@ -58,24 +75,24 @@ class RaptorController {
 	 * Renvoie le module
 	 * @return string
 	 */
-	public static function getModule () {
-		return _request('module');
+	public function getModule () {
+		return $this->_module;
 	}
 	
 	/**
 	 * Renvoie le controller
 	 * @return string
 	 */
-	public static function getController () {
-		return _request('controller');
+	public function getController () {
+		return $this->_controller;
 	}
 	
 	/**
 	 * Renvoie l'action
 	 * @return string
 	 */
-	public static function getAction () {
-		return _request('action');
+	public function getAction () {
+		return $this->_action;
 	}
 	
 	/**
@@ -110,6 +127,8 @@ class RaptorController {
 				
 				try {
 					
+					_info($this, 'Call action');
+					
 					RaptorHTMLHeader::addCSSLink ('default|css/core.css');
 					RaptorHTMLHeader::addJSLink ('default|js/mootools-core-1.4.5-full-nocompat.js');
 					RaptorHTMLHeader::addJSLink ('default|js/mootools-more-1.4.0.1.js');
@@ -124,15 +143,18 @@ class RaptorController {
 					
 				} catch (Exception $e) {
 					try {
+						_error($e, 'Catch exception call RaptorActionReturn::catchException');
 						$actionReturn = $controller->catchException ($this->_action, $e, $actionReturn);
 					} catch (Exception $e) {
 						try {
 							if ($auroundController) {
+								_error($e, 'Catch exception call AuroundController::catchException');
 								$actionReturn = $auroundController->catchException ($this->_controller, $this->_action, $e, $actionReturn);
 							} else {
 								throw $e;
 							}
 						} catch (Exception $e) {
+								_error($e, 'Catch exception and display ');
 							$this->displayExceptionPage ($e);
 							return;
 						}
