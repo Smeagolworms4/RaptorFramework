@@ -9,11 +9,22 @@ class InstallActionController extends RaptorActionController {
 	 * @return RaptorActionReturn 
 	 */
 	public function processDefault () {
-		$ppo = new RaptorPPO ();
 		
-		$ppo->installOk = _iOClass('RaptorInstall')->install ();
-		var_dump ('fff');
-		return _arDirectSmarty ($ppo, 'default|install/default.tpl');
+		
+		$step  = _request ('step', 1);
+		
+		switch ($setp) {
+			
+			case 1:
+				$ppo = new RaptorPPO ();
+				return _arDirectSmarty ($ppo, 'install/step1.tpl');
+			
+			case 2:
+				$ppo = new RaptorPPO ();
+				$ppo->installOk = _iOClass('RaptorInstall')->install ();
+				return _arDirectSmarty ($ppo, 'install/step2.tpl');
+			
+		}
 	}
 		
 }

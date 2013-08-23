@@ -22,11 +22,9 @@ class RaptorAutoloader {
 	public static function autoloadCore ($class, $forceBuild = false) {
 		
 		$file = TEMP_CACHE_PATH.'autoload/autoload.php';
-		if (!file_exists (TEMP_CACHE_PATH)) {
-			mkdir (TEMP_CACHE_PATH);
-			mkdir (TEMP_CACHE_PATH.'autoload');
-		} else if (!file_exists (TEMP_CACHE_PATH.'autoload')) {
-			mkdir (TEMP_CACHE_PATH.'autoload');
+		
+		if (!file_exists (TEMP_CACHE_PATH.'autoload')) {
+			mkdir (TEMP_CACHE_PATH.'autoload', 0777, true);
 		}
 		
 		if (!self::$files || $forceBuild) { // Si le cache est déjà chargé
@@ -104,15 +102,8 @@ class RaptorAutoloader {
 				
 				} else {
 
-					if (!file_exists (TEMP_CACHE_PATH)) {
-						mkdir (TEMP_CACHE_PATH);
-						mkdir (TEMP_CACHE_PATH.'autoload');
-						mkdir (TEMP_CACHE_PATH.'autoload/modules');
-					} else if (!file_exists (TEMP_CACHE_PATH.'autoload')) {
-						mkdir (TEMP_CACHE_PATH.'autoload');
-						mkdir (TEMP_CACHE_PATH.'autoload/modules');
-					} else if (!file_exists (TEMP_CACHE_PATH.'autoload/modules')) {
-						mkdir (TEMP_CACHE_PATH.'autoload/modules');
+					if (!file_exists (TEMP_CACHE_PATH.'autoload/modules')) {
+						mkdir (TEMP_CACHE_PATH.'autoload/modules', 0777, true);
 					}
 					
 					$classesDir = MODULES_PATH.$context.'/'.CLASSES_DIR.'/';

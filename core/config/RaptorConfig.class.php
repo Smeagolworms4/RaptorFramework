@@ -113,7 +113,7 @@ class RaptorConfig {
 	 * Page d'accueil - format : module|controler|action
 	 * @var string
 	 */
-	public $homePage = 'default|default|default';
+	public $homePage = 'default|default|welcome';
 
 	/**
 	 * Page d'accueil - format : module|controler|action
