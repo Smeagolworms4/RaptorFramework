@@ -20,7 +20,7 @@ class DefaultActionController extends RaptorActionController {
 	 */
 	public function processWelcome () {
 		$ppo = new RaptorPPO ();
-		return _arSmarty($ppo, 'default|welcome.tpl');
+		return _arSmarty($ppo, 'default/default|welcome.tpl');
 	}
 	
 	/**
@@ -32,7 +32,7 @@ class DefaultActionController extends RaptorActionController {
 		header("HTTP/1.0 404 Not Found");
 		
 		$ppo = new RaptorPPO ();
-		return _arSmarty($ppo, 'default|404.tpl');
+		return _arSmarty($ppo, 'default/default|404.tpl');
 	}
 	
 	/**

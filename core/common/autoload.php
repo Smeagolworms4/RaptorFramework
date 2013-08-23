@@ -64,7 +64,6 @@ class RaptorAutoloader {
 					mkdir (TEMP_CACHE_PATH, 0777, true);
 				}
 				file_put_contents($file, $content);
-				exit ();
 			}
 		}
 		if (isset (self::$files[$class])) {

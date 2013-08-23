@@ -127,7 +127,11 @@ class RaptorController {
 						$actionReturn = $controller->catchException ($this->_action, $e, $actionReturn);
 					} catch (Exception $e) {
 						try {
-							if ($auroundController) $actionReturn = $auroundController->catchException ($this->_controller, $this->_action, $e, $actionReturn);
+							if ($auroundController) {
+								$actionReturn = $auroundController->catchException ($this->_controller, $this->_action, $e, $actionReturn);
+							} else {
+								throw $e;
+							}
 						} catch (Exception $e) {
 							$this->displayExceptionPage ($e);
 							return;
@@ -138,7 +142,11 @@ class RaptorController {
 				// Affiche le resultat
 				// Normalement il est impossible de ne pas rentrer dans le if (Sauf FATAL bien evidemment)
 				if ($actionReturn || is_a($actionReturn, 'RaptorActionController')) {
-					echo $actionReturn;
+					try {
+						echo $actionReturn->fetch ();
+					} catch (Exception $e) {
+						$this->displayExceptionPage ($e);
+					}
 					return;
 				} else {
 					try {
