@@ -9,6 +9,9 @@ class InstallActionController extends RaptorActionController {
 		if (RaptorConfig::getInstance()->MODE != RaptorConfig::MODE_DEV) {
 			throw RaptorException (__('Le framework doit être en mode DEV pour l\'installation'));
 		}
+		if (file_exists(self::$WORKSPACE_CONFIG_FILE)) {
+			throw RaptorException (__('Un fichier de configuration personnel existe déjà'));
+		}
 	}
 	
 	/**

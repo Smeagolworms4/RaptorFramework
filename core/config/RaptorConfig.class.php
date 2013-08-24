@@ -7,6 +7,7 @@ class RaptorConfig {
 
 	const MODE_DEV = 'DEV';
 	const MODE_PROD = 'PROD';
+	public static $WORKSPACE_CONFIG_FILE = '';
 	
 	/**
 	 * L'instance
@@ -47,14 +48,15 @@ class RaptorConfig {
 	 * Constructeur
 	 */
 	private function __construct () {
+		self::$WORKSPACE_CONFIG_FILE = WORKSPACE_PATH.'config.php';
 	}
 	
 	/**
 	 * Charge le fichier de configuration du workspace
 	 */
 	public function loadWorkspaceConfig () {
-		if (file_exists ($file = WORKSPACE_PATH.'config.php')) {
-			require_once ($file);
+		if (file_exists (self::$WORKSPACE_CONFIG_FILE)) {
+			require_once (self::$WORKSPACE_CONFIG_FILE);
 		}
 	}
 	
