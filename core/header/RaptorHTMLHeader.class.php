@@ -32,15 +32,17 @@ class RaptorHTMLHeader {
 	 * @return string
 	 */
 	private static function _getCurrentPage ($contoller = NULL, $action = NULL) {
-		return (($contoller) ? $contoller : RaptorController::getController ()).'_'.(($action) ? $action : RaptorController::getAction ());
+		$controller = RaptorController::getInstance ();
+		return (($contoller) ? $contoller : $controller->getController ()).'_'.(($action) ? $action : $controller->getAction ());
 	}
 	
 	public static function getHTMLHead () {
 		self::_initialise ();
+		$controller = RaptorController::getInstance ();
 		
 		$content = '
-			<link href="'._url('||concat', array('t'=>'css', 'c'=>RaptorController::getController (), 'a'=>RaptorController::getAction ())).'" rel="stylesheet" type="text/css" />
-			<script src="'._url('||concat', array('t'=>'js', 'c'=>RaptorController::getController (), 'a'=>RaptorController::getAction ())).'"  type="text/javascript"></script>
+			<link href="'._url('default|default|concat', array('t'=>'css', 'c'=>$controller->getController (), 'a'=>$controller->getAction ())).'" rel="stylesheet" type="text/css" />
+			<script src="'._url('default|default|concat', array('t'=>'js', 'c'=>$controller->getController (), 'a'=>$controller->getAction ())).'"  type="text/javascript"></script>
 		';
 		
 		return $content;

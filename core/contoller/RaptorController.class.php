@@ -127,11 +127,11 @@ class RaptorController {
 				
 				try {
 					
-					_info($this, 'Call action');
+					_info($this, __('Appel de l\'action'));
 					
 					RaptorHTMLHeader::addCSSLink ('default|css/core.css');
-					RaptorHTMLHeader::addJSLink ('default|js/mootools-core-1.4.5-full-nocompat.js');
-					RaptorHTMLHeader::addJSLink ('default|js/mootools-more-1.4.0.1.js');
+					RaptorHTMLHeader::addJSLink ('default|js/libs/mootools/mootools-core-1.4.5-full-nocompat.js');
+					RaptorHTMLHeader::addJSLink ('default|js/libs/mootools/mootools-more-1.4.0.1.js');
 					RaptorHTMLHeader::addJSLink ('default|js/Raptor.js');
 					RaptorHTMLHeader::addJSLink ('default|js/Utils.js');
 					
@@ -143,18 +143,18 @@ class RaptorController {
 					
 				} catch (Exception $e) {
 					try {
-						_error($e, 'Catch exception call RaptorActionReturn::catchException');
+						_error($e, __('Exception capturé, appel de l\'action RaptorActionReturn::catchException'));
 						$actionReturn = $controller->catchException ($this->_action, $e, $actionReturn);
 					} catch (Exception $e) {
 						try {
 							if ($auroundController) {
-								_error($e, 'Catch exception call AuroundController::catchException');
+								_error($e, __('Exception capturé, appel de l\'action AuroundController::catchException'));
 								$actionReturn = $auroundController->catchException ($this->_controller, $this->_action, $e, $actionReturn);
 							} else {
 								throw $e;
 							}
 						} catch (Exception $e) {
-								_error($e, 'Catch exception and display ');
+							_error($e, __('Exception capturé et affichage'));
 							$this->displayExceptionPage ($e);
 							return;
 						}
@@ -182,7 +182,7 @@ class RaptorController {
 		}
 		
 		$config = RaptorConfig::getInstance ();
-		echo _arRedirect(_url ($config->error404Page));
+		echo _arRedirect(_url ($config->error404Page, array ('m'=>$this->_module, 'c'=>$this->_controller, 'a'=>$this->_action)));
 	}
 	
 	/**

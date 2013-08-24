@@ -27,13 +27,9 @@ class RaptorUrl {
 			return $dest.(($paramsURl) ? ((srtpos ($dest, '?') !== false) ? '&' : '?').$paramsURl : '');
 		}
 		$explode = explode ('|', $dest);
-		$module    = (                       $explode[0]) ? $explode[0] : 'default';
-		$contoller = (isset ($explode[1]) && $explode[1]) ? $explode[1] : 'default';
-		$action    = (isset ($explode[2]) && $explode[2]) ? $explode[2] : 'default';
-		
-		$module    = ($module    !== '') ? $module    : 'default';
-		$contoller = ($contoller !== '') ? $contoller : 'default';
-		$action    = ($action    !== '') ? $action    : 'default';
+		$module    = (                       $explode[0]) ? $explode[0] : RaptorController::getInstance ()->getModule ();
+		$contoller = (isset ($explode[1]) && $explode[1]) ? $explode[1] : RaptorController::getInstance ()->getController ();
+		$action    = (isset ($explode[2]) && $explode[2]) ? $explode[2] : RaptorController::getInstance ()->getAction ();
 		
 		$file   = $this->getScriptFile ();
 		$racine = $this->getRacineUrl ();

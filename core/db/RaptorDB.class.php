@@ -2,7 +2,7 @@
 /**
  * Class PHP permettant de gérer les connexions à la base de donnée
  */
-class RaptorDB {
+abstract class RaptorDB {
 	
 	/**
 	 * Liste des connexions

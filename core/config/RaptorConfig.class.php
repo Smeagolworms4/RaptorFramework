@@ -105,12 +105,18 @@ class RaptorConfig {
 	 * @var string
 	 */
 	public $NUMBER_DEC_SEPARATOR = ',';
+
+	/**
+	 * Mode production (DEV/PROD)
+	 * @var string
+	 */
+	public $MODE = self::MODE_DEV;
 	
 	/**
 	 * Mode production (DEV/PROD)
-	 * @var unknown_type
+	 * @var string
 	 */
-	public $MODE = self::MODE_DEV;
+	public $VERSION = '0.1';
 	
 	/**
 	 * Page d'accueil - format : module|controler|action

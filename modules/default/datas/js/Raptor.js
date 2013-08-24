@@ -5,18 +5,7 @@
  * @version 	1.0
  */
 var Raptor = {
-//	
-//	/**
-//	 * Crée une zone et la charge
-//	 * @param string id
-//	 * @param string url
-//	 */
-//	createZone: function (id, url) {
-//		$(window).load (function () {
-//			$('#'+id).load (url);
-//		});
-//	},
-//	
+	
 //	/**
 //	 * Renvoie une URL en focntion de dest
 //	 * @param string dest

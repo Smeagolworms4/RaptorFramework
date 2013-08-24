@@ -32,7 +32,7 @@ class DefaultActionController extends RaptorActionController {
 		header("HTTP/1.0 404 Not Found");
 		
 		$ppo = new RaptorPPO ();
-		return _arSmarty($ppo, 'default/default|404.tpl');
+		return _arSmarty($ppo, 'default|default/404.tpl');
 	}
 	
 	/**

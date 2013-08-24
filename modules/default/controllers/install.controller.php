@@ -4,6 +4,13 @@
  **/
 class InstallActionController extends RaptorActionController {
 	
+	
+	public function beforeAction($actionName) {
+		if (RaptorConfig::getInstance()->MODE != RaptorConfig::MODE_DEV) {
+			throw RaptorException (__('Le framework doit être en mode DEV pour l\'installation'));
+		}
+	}
+	
 	/**
 	 * @return RaptorActionReturn 
 	 */
@@ -17,7 +24,11 @@ class InstallActionController extends RaptorActionController {
 	 */
 	public function processStep1 () {
 		$ppo = new RaptorPPO ();
-		return _arDirectSmarty ($ppo, 'install/step1.tpl');
+		$tpl = new RaptorTpl($ppo);
+		
+		$ppo->configFile = "<?php\n\n".$tpl->smarty('install/config.php.tpl');
+		
+		return _arSmarty ($ppo, 'install/step1.tpl');
 	}
 	
 	/**
@@ -25,9 +36,12 @@ class InstallActionController extends RaptorActionController {
 	 * @return RaptorActionReturn
 	 */
 	public function processStep2 () {
+		
+		exit ();
+		
 		$ppo = new RaptorPPO ();
 		$ppo->installOk = _iOClass('RaptorInstall')->install ();
-		return _arDirectSmarty ($ppo, 'install/step2.tpl');
+		return _arSmarty ($ppo, 'install/step2.tpl');
 	}
 		
 }
