@@ -200,15 +200,16 @@ class RaptorI18N {
 		$country = $this->getCountry();
 		$key     = $this->_getKey ($value);
 		$result  = NULL;
+		$config  = _ioClass ('RaptorConfig');
 		
 		$this->_recurcivity++;
 		if ($this->_recurcivity >= self::MAX_RECURCIVITY) {
-			throw new RaptorException ('Probleme de base de données sur l\'i18n');
+			throw new RaptorException ('Problème de base de données sur l\'i18n');
 		}
 		
 		if ($this->_testConnection ()) {
 			try {
-				$dao = _dao('raptor_i18n');
+				$dao = _dao($config->dataTablePrefixe.'_i18n');
 				$default = $dao->get (array ($key, self::SYSTEM_LANG, self::SYSTEM_COUNTRY));
 				if ($default) {
 					$default->last_use = NULL; // Il y a un trigger de maj
@@ -293,6 +294,10 @@ class RaptorI18N {
 	}
 	
 	private function _testConnection () {
+		
+		// TODO erreurnon gerer à réparer
+		return false;
+		
 		if (!RaptorDB::testConnection ()) {
 			return false;
 		}

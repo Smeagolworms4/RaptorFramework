@@ -6,7 +6,7 @@ class InstallActionController extends RaptorActionController {
 	
 	public function beforeAction($actionName) {
 		if (_ioClass ('RaptorConfig')->MODE != RaptorConfig::MODE_DEV) {
-			throw RaptorException (__('Le framework doit être en mode DEV pour l\'installation'));
+			throw new RaptorException (__('Le framework doit être en mode DEV pour l\'installation'));
 		}
 	}
 	
@@ -60,7 +60,8 @@ class InstallActionController extends RaptorActionController {
 	protected function processStep3 () {
 		
  		$ppo = new RaptorPPO ();
-// 		$ppo->installOk = _iOClass('RaptorInstall')->install ();
+ 		$installer = new RaptorInstall ();
+ 		$ppo->installOk = $installer->install ();
 		return _arSmarty ($ppo, 'install/step3.tpl');
 	}
 	

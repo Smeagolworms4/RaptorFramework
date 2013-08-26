@@ -43,7 +43,7 @@ class RaptorInstall {
 		$config = _ioClass ('RaptorConfig');
 		$ppo    = new RaptorPPO ();
 		$tpl    = new RaptorTpl ($ppo);
-		$ppo->prefixe_ = $config->dataTablePrefixe;
+		$ppo->prefixe = $config->dataTablePrefixe;
 		
 		$sqlScript = $tpl->smarty ('install/sql.tpl');
 		

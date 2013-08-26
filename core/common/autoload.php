@@ -131,7 +131,7 @@ class RaptorAutoloader {
 		}
 		if (isset (self::$filesModule[$context]) && isset (self::$filesModule[$context][$class])) {
 				
-			if (file_exists(sself::$filesModule[$context][$class])) {
+			if (file_exists(self::$filesModule[$context][$class])) {
 				include_once (self::$filesModule[$context][$class]);
 			}
 				
