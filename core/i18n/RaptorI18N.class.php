@@ -364,7 +364,7 @@ class RaptorI18N {
 	 * @return bool
 	 */
 	public function localIsAvailable ($local) {
-		return isset (self::$_localeData[$local]) && RaptorConfig::getInstance ()->localIsAvailable ($local);
+		return isset (self::$_localeData[$local]) && _ioClass ('RaptorConfig')->localIsAvailable ($local);
 	}
 	
 	/**

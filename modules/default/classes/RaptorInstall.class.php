@@ -40,7 +40,7 @@ class RaptorInstall {
 	 */
 	private function _installDB() {
 		
-		$config = RaptorConfig::getInstance ();
+		$config = _ioClass ('RaptorConfig');
 		$ppo    = new RaptorPPO ();
 		$tpl    = new RaptorTpl ($ppo);
 		$ppo->prefixe_ = $config->dataTablePrefixe;

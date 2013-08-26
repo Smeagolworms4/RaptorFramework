@@ -64,7 +64,7 @@ class RaptorDB_PDOMySQL extends RaptorDB {
 	 */
 	public function query ($sql, $params = array ()) {
 		
-		$config = RaptorConfig::getInstance ();
+		$config = _ioClass ('RaptorConfig');
 		$stmt = $this->_pdo->prepare($sql);
 		if (!$stmt){
 			throw new RaptorDBException (__('Impossible de préparer la requête [%0] - %1 - %2', array (

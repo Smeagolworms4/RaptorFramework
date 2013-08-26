@@ -11,7 +11,7 @@ class RaptorActionReturnSmarty extends RaptorActionReturn {
 	 */
 	public function fetch () {
 		
-		$config  = RaptorConfig::getInstance();
+		$config  = _ioClass ('RaptorConfig');
 		$ppoMAIN = new RaptorPPO ();
 		$tplMAIN = new RaptorTpl ($ppoMAIN);
 		
@@ -22,8 +22,8 @@ class RaptorActionReturnSmarty extends RaptorActionReturn {
 		$ppoMAIN->TITLE_PAGE     = (isset ($ppo->TITLE_PAGE)     ? $ppo->TITLE_PAGE     : $config->titlePage);
 		$ppoMAIN->SUB_TITLE_PAGE = (isset ($ppo->SUB_TITLE_PAGE) ? $ppo->SUB_TITLE_PAGE : '');
 		
-		$ppoMAIN->HEAD = RaptorHTMLHeader::getHTMLHead ();
 		$ppoMAIN->MAIN = $tpl->smarty($pathTpl);
+		$ppoMAIN->HEAD = _ioClass ('RaptorHTMLHeader')->getHTMLHead ();
 		
 		$pathTplMain = (isset ($ppo->MAIN_TEMPLATE) ? $ppo->MAIN_TEMPLATE : 'default|main.tpl');
 		

@@ -18,7 +18,7 @@ abstract class RaptorDB {
 	public static function testConnection ($connectionName = NULL) {
 		
 		if ($connectionName === NULL) {
-			$config = RaptorConfig::getInstance ();
+			$config = _ioClass ('RaptorConfig');
 			$connectionName = $config->defaultConnection;
 		}
 		
@@ -26,7 +26,7 @@ abstract class RaptorDB {
 			return true;
 		}
 		
-		$config = RaptorConfig::getInstance ();
+		$config = _ioClass ('RaptorConfig');
 		if (!isset ($config->arConnection [$connectionName])) {
 			return false;
 		}
@@ -66,13 +66,13 @@ abstract class RaptorDB {
 	public static function getConnection ($connectionName = NULL) {
 		
 		if ($connectionName === NULL) {
-			$config = RaptorConfig::getInstance ();
+			$config = _ioClass ('RaptorConfig');
 			$connectionName = $config->defaultConnection;
 		}
 		
 		if (!isset (self::$_connexions[$connectionName])) {
 			
-			$config = RaptorConfig::getInstance ();
+			$config = _ioClass ('RaptorConfig');
 			
 			if (!isset ($config->arConnection [$connectionName])) {
 				throw new RaptorDBException (__('Les paramètres de connection à la base de données n\'existe pas'));

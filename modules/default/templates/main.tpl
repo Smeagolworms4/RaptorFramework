@@ -11,7 +11,6 @@
 	</head>
 	<body>
 		<h1>{$ppo->TITLE_PAGE}</h1>
-		
 		{$ppo->MAIN}
 	</body>
 </html>

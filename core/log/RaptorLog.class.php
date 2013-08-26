@@ -34,7 +34,7 @@ class RaptorLog {
 	 * @param string $label
 	 */
 	public function info ($objet, $label = '') {
-		if (RaptorConfig::getInstance()->MODE == RaptorConfig::MODE_DEV) {
+		if (_ioClass ('RaptorConfig')->MODE == RaptorConfig::MODE_DEV) {
 			FB::info ($objet, $label);
 		}
 	}

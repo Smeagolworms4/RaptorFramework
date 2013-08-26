@@ -4,20 +4,16 @@
  **/
 class InstallActionController extends RaptorActionController {
 	
-	
 	public function beforeAction($actionName) {
-		if (RaptorConfig::getInstance()->MODE != RaptorConfig::MODE_DEV) {
+		if (_ioClass ('RaptorConfig')->MODE != RaptorConfig::MODE_DEV) {
 			throw RaptorException (__('Le framework doit être en mode DEV pour l\'installation'));
-		}
-		if (file_exists(self::$WORKSPACE_CONFIG_FILE)) {
-			throw RaptorException (__('Un fichier de configuration personnel existe déjà'));
 		}
 	}
 	
 	/**
 	 * @return RaptorActionReturn 
 	 */
-	public function processDefault () {
+	protected function processDefault () {
 		return _arRedirect(_url ('||step1'));
 	}
 	
@@ -25,7 +21,12 @@ class InstallActionController extends RaptorActionController {
 	 * Etape 1
 	 * @return RaptorActionReturn
 	 */
-	public function processStep1 () {
+	protected function processStep1 () {
+		
+		if (file_exists(RaptorConfig::$WORKSPACE_CONFIG_FILE)) {
+			return _arRedirect(_url ('||step2'));
+		}
+		
 		$ppo = new RaptorPPO ();
 		$tpl = new RaptorTpl($ppo);
 		
@@ -38,7 +39,7 @@ class InstallActionController extends RaptorActionController {
 	 * Etape 2
 	 * @return RaptorActionReturn
 	 */
-	public function processStep2 () {
+	protected function processStep2 () {
 		
 		exit ();
 		

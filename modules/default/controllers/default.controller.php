@@ -8,8 +8,8 @@ class DefaultActionController extends RaptorActionController {
 	 * Page initial du framework
 	 * @return RaptorActionReturn
 	 */
-	public function processDefault () {
-		$config = RaptorConfig::getInstance ();
+	protected function processDefault () {
+		$config = _ioClass ('RaptorConfig');
 		return _arRedirect(_url ($config->homePage));
 	}
 	
@@ -18,7 +18,7 @@ class DefaultActionController extends RaptorActionController {
 	 * Page d'accueil
 	 * @return RaptorActionReturn 
 	 */
-	public function processWelcome () {
+	protected function processWelcome () {
 		$ppo = new RaptorPPO ();
 		return _arSmarty($ppo, 'default|default/welcome.tpl');
 	}
@@ -27,7 +27,7 @@ class DefaultActionController extends RaptorActionController {
 	 * Page 404
 	 * @return RaptorActionReturn
 	 */
-	public function process404 () {
+	protected function process404 () {
 		
 		header("HTTP/1.0 404 Not Found");
 		
@@ -38,7 +38,7 @@ class DefaultActionController extends RaptorActionController {
 	/**
 	 * Renvoie le contenu des fichiers ressource concaténés
 	 */
-	public function processConcat () {
+	protected function processConcat () {
 		$ppo = new RaptorPPO ();
 		
 		if (_request('t', 'css') == 'css') {
@@ -47,7 +47,9 @@ class DefaultActionController extends RaptorActionController {
 			header('Content-type: application/javascript');
 		}
 		
-		$ppo->MAIN = RaptorHTMLHeader::getConcatFile(_request('t', 'css'), _request('c', 'default'), _request('a', 'default'));
+		$oController = _ioClass ('RaptorController');
+		
+		$ppo->MAIN = _ioClass ('RaptorHTMLHeader')->getConcatFile(_request('t', 'css'), _request('c', 'default'), _request('a', 'default'));
 		return _arDirectSmarty ($ppo, 'default|empty.tpl');
 	}
 	

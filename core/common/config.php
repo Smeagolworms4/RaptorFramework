@@ -1,3 +1,3 @@
 <?php
-$config = RaptorConfig::getInstance ();
+$config = _ioClass ('RaptorConfig');
 $config->loadWorkspaceConfig ();

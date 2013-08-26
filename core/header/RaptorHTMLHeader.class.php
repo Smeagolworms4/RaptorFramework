@@ -5,24 +5,17 @@
  *
  */
 class RaptorHTMLHeader {
-	
-	
-	/**
-	 * Initialisation
-	 * @var array
-	 */
-	private static $_isInit = false;
-	
+
+	private $_jsCode = array ();
+	private $_jsCodeOnLoad = array ();
 	
 	/**
 	 * Initialise les variables request
 	 */
-	private static function _initialise () {
-		if (!self::$_isInit) {
-			self::$_isInit = true;
-			$page = self::_getCurrentPage ();
-			RaptorSession::delete('CSSHTMLHeader_'.$page, 'RaptorCore');
-		}
+	public function __construct () {
+		$page = $this->_getCurrentPage ();
+		RaptorSession::delete('CSSHTMLHeader_'.$page, 'RaptorCore');
+		RaptorSession::delete('JSHTMLHeader_'.$page, 'RaptorCore');
 	}
 	
 	/**
@@ -31,31 +24,58 @@ class RaptorHTMLHeader {
 	 * @param string $action
 	 * @return string
 	 */
-	private static function _getCurrentPage ($contoller = NULL, $action = NULL) {
-		$controller = RaptorController::getInstance ();
-		return (($contoller) ? $contoller : $controller->getController ()).'_'.(($action) ? $action : $controller->getAction ());
+	private function _getCurrentPage ($contoller = NULL, $action = NULL) {
+		$oController = _ioClass ('RaptorController');
+		return (($contoller) ? $contoller : $oController->getController ()).'_'.(($action) ? $action : $oController->getAction ());
 	}
 	
-	public static function getHTMLHead () {
-		self::_initialise ();
-		$controller = RaptorController::getInstance ();
-		
+	public function getHTMLHead () {
+		$controller = _ioClass ('RaptorController');
 		$content = '
 			<link href="'._url('default|default|concat', array('t'=>'css', 'c'=>$controller->getController (), 'a'=>$controller->getAction ())).'" rel="stylesheet" type="text/css" />
 			<script src="'._url('default|default|concat', array('t'=>'js', 'c'=>$controller->getController (), 'a'=>$controller->getAction ())).'"  type="text/javascript"></script>
+			<script type="text/javascript">
+			//<!--
+				window.addEvent (\'load\', function (event) {
+					'.implode ("\n", $this->_jsCodeOnLoad).'
+				});
+				'.implode ("\n", $this->_jsCode).'
+			//-->
+			</script>
 		';
 		
 		return $content;
 	}
 	
 	/**
+	 * Ajoute du code JS dans l'entête pour le onload de la page
+	 * @param string $code
+	 * @param bool   $uniqueInsert
+	 */
+	public function addJSCodeOnLoad ($code, $uniqueInsert = false) {
+		if (!$uniqueInsert || !in_array($code, $this->_jsCodeOnLoad)) {
+			$this->_jsCodeOnLoad[] = $code;
+		}
+	}
+	
+	/**
+	 * Ajoute du code JS dans l'entête
+	 * @param string $code
+	 * @param bool   $uniqueInsert
+	 */
+	public function addJSCode ($code, $uniqueInsert = false) {
+		if (!$uniqueInsert || !in_array($code, $this->_jsCode)) {
+			$this->_jsCode[] = $code;
+		}
+	}
+	
+	/**
 	 * Ajoute un lien vers un fichier Javascript. N'ajoutera pas deux fois un même lien
 	 * @param string $src le chemin vers le javascript (tel qu'il apparaitra)
 	 */
-	public static function addJSLink ($src){
-		self::_initialise ();
+	public function addJSLink ($src) {
 		
-		$page = self::_getCurrentPage ();
+		$page = $this->_getCurrentPage ();
 		if ($page == 'default_concat') {
 			return;
 		}
@@ -81,8 +101,7 @@ class RaptorHTMLHeader {
 	 * Ajoute un lien vers un fichier CSS. N'ajoutera pas deux fois le même lien
 	 * @param string $src le chemin vers le fichier CSS (tel qu'il apparaitra)
 	 */
-	public static function addCSSLink ($src){
-		self::_initialise ();
+	public function addCSSLink ($src) {
 		
 		$page = self::_getCurrentPage ();
 		if ($page == 'default_concat') {
@@ -112,16 +131,17 @@ class RaptorHTMLHeader {
 	 * @param string $controller
 	 * @param string $action
 	 */
-	public static function getConcatFile ($type, $controller, $action) {
-		self::_initialise ();
+	public function getConcatFile ($type, $controller, $action) {
 		
 		$content = '';
 		$page = self::_getCurrentPage ($controller, $action);
 		$list = array ();
 		if ($type == 'js') {
+			_info ($this, 'Création de JS pour la page : '.$controller.'/'.$action);
 			$list = _sessionGet('JSHTMLHeader_'.$page, array (), 'RaptorCore');
 			RaptorSession::delete('JSHTMLHeader_'.$page, 'RaptorCore');
 		} else {
+			_info ($this, 'Création de CSS pour la page : '.$controller.'/'.$action);
 			$list = _sessionGet('CSSHTMLHeader_'.$page, array (), 'RaptorCore');
 			RaptorSession::delete('CSSHTMLHeader_'.$page, 'RaptorCore');
 		}

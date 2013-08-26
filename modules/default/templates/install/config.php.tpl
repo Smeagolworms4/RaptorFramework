@@ -1,4 +1,4 @@
-$config = RaptorConfig::getInstance ();
+$config = _ioClass ('RaptorConfig');
 
 // {'Vous pouvez choisir entre :'|__}
 // RaptorConfig::MODE_DEV

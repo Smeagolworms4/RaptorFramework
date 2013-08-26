@@ -73,7 +73,7 @@ class RaptorTpl {
 	 */
 	public function getTemplatePath ($module, $fileTpl) {
 		$path = MODULES_PATH.$module.'/'.TEMPPLATE_DIR.'/';
-		$config = RaptorConfig::getInstance();
+		$config = _ioClass ('RaptorConfig');
 		
 		if ($config->theme) {
 			$themePath = THEMES_PATH.$config->theme.'/modules/'.$module.'/'.TEMPPLATE_DIR.'/';

@@ -9,11 +9,6 @@ class RaptorConfig {
 	const MODE_PROD = 'PROD';
 	public static $WORKSPACE_CONFIG_FILE = '';
 	
-	/**
-	 * L'instance
-	 * @var RaptorConfig
-	 */
-	private static $_instance = null;
 	
 	/**
 	 * Liste des paramètres de la config qui seront envoyés au JS
@@ -34,20 +29,9 @@ class RaptorConfig {
 	);
 	
 	/**
-	 * Retoune l'instance
-	 * @return RaptorConfig
-	 */
-	public static function getInstance () {
-		if (self::$_instance == null) {
-			self::$_instance = new RaptorConfig ();
-		}
-		return self::$_instance;
-	}
-	
-	/**
 	 * Constructeur
 	 */
-	private function __construct () {
+	public function __construct () {
 		self::$WORKSPACE_CONFIG_FILE = WORKSPACE_PATH.'config.php';
 	}
 	

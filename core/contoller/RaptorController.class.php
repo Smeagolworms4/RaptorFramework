@@ -4,12 +4,6 @@
  * 
  */
 class RaptorController {
-
-	/**
-	 * L'instance
-	 * @var RaptorController
-	 */
-	private static $_instance = null;
 	
 	/**
 	 * @var string
@@ -26,20 +20,18 @@ class RaptorController {
 	private $_action;
 	
 	/**
-	 * Retoune l'instance
-	 * @return RaptorController
-	 */
-	public static function getInstance () {
-		if (self::$_instance == null) {
-			self::$_instance = new RaptorController ();
-		}
-		return self::$_instance;
-	}
-	
-	/**
 	 * Constructeur
 	 */
-	private function __construct () {
+	public function __construct () {
+		
+		$config = _ioClass ('RaptorConfig');
+		
+		if ($config->MODE == RaptorConfig::MODE_DEV) {
+			ini_set('display_errors', 1);
+			ini_set('log_errors', 1);
+			error_reporting(E_ALL);
+		}
+		
 		
 		$target = str_replace ($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']);
 		
@@ -128,12 +120,12 @@ class RaptorController {
 				try {
 					
 					_info($this, __('Appel de l\'action'));
-					
-					RaptorHTMLHeader::addCSSLink ('default|css/core.css');
-					RaptorHTMLHeader::addJSLink ('default|js/libs/mootools/mootools-core-1.4.5-full-nocompat.js');
-					RaptorHTMLHeader::addJSLink ('default|js/libs/mootools/mootools-more-1.4.0.1.js');
-					RaptorHTMLHeader::addJSLink ('default|js/Raptor.js');
-					RaptorHTMLHeader::addJSLink ('default|js/Utils.js');
+					_ioClass ('RaptorHTMLHeader')->addCSSLink ('default|css/core.css');
+					_ioClass ('RaptorHTMLHeader')->addJSLink ('default|js/libs/mootools/mootools-core-1.4.5-full-nocompat.js');
+					_ioClass ('RaptorHTMLHeader')->addJSLink ('default|js/libs/mootools/mootools-more-1.4.0.1.js');
+					_ioClass ('RaptorHTMLHeader')->addJSLink ('default|js/libs/raptor/Utils.js');
+					_ioClass ('RaptorHTMLHeader')->addJSLink ('default|js/libs/raptor/Raptor.js');
+					_ioClass ('RaptorHTMLHeader')->addJSLink ('default|js/libs/raptor/Code.js');
 					
 					if ($auroundController) $auroundController->beforeController ($this->_controller, $this->_action);
 					$controller->beforeAction ($this->_action);
@@ -181,7 +173,7 @@ class RaptorController {
 			}
 		}
 		
-		$config = RaptorConfig::getInstance ();
+		$config = _ioClass ('RaptorConfig');
 		echo _arRedirect(_url ($config->error404Page, array ('m'=>$this->_module, 'c'=>$this->_controller, 'a'=>$this->_action)));
 	}
 	

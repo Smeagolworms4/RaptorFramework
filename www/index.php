@@ -5,5 +5,5 @@ require_once ('../core/common/autoload.php');
 require_once ('../core/common/shortcuts.php');
 require_once ('../core/common/config.php');
 
-$coord = RaptorController::getInstance ();
+$coord = _ioClass ('RaptorController');
 $coord->process ();

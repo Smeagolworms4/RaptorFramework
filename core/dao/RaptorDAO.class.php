@@ -89,7 +89,7 @@ class RaptorDAO {
 	public static function getInstance ($tablename, $jointures = array (), $connectionName = NULL) {
 		
 		if ($connectionName === NULL) {
-			$config = RaptorConfig::getInstance ();
+			$config = _ioClass ('RaptorConfig');
 			$connectionName = $config->defaultConnection;
 		}
 		
