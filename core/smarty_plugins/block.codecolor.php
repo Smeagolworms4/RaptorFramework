@@ -16,7 +16,7 @@ function smarty_block_codecolor ($pParams, $pContent, &$me, $first) {
 	$theme    = (isset ($pParams['theme']))    ? $pParams['theme']    : 'github';
 	
 	_ioClass ('RaptorHTMLHeader')->addCSSLink ('default|js/libs/highlight.js/styles/'.$theme.'.css');
-	_ioClass ('RaptorHTMLHeader')->addJSLink  ('default|js/libs/highlight.js/highlight.pack.js');
+// 	_ioClass ('RaptorHTMLHeader')->addJSLink  ('default|js/libs/highlight.js/highlight.pack.js');
 	
 	$return = '
 		<div id="'.$id.'" class="RaptorColor '.$class.'" >
