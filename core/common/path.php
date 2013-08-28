@@ -9,7 +9,7 @@
 	define ('WWW_PATH', ROOT_PATH.'www/');
 	define ('WORKSPACE_PATH', ROOT_PATH.'workspace/');
 	define ('WORKSPACE_THEMES_PATH', WORKSPACE_PATH.'themes/');
-	define ('WORKSPACE_MODULES_PATH', WORKSPACE_PATH.'themes/');
+	define ('WORKSPACE_MODULES_PATH', WORKSPACE_PATH.'modules/');
 	
 	define ('TEMP_PATH', ROOT_PATH.'temp/');
 	define ('TEMP_CACHE_PATH', TEMP_PATH.'cache/');

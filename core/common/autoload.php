@@ -60,8 +60,8 @@ class RaptorAutoloader {
 				$content = '<?php $autoload = '.var_export (self::$files, true).';';
 				
 				// Génère les repertoire et le fichier
-				if (!file_exists(TEMP_CACHE_PATH)) {
-					mkdir (TEMP_CACHE_PATH, 0777, true);
+				if (!file_exists(TEMP_CACHE_PATH.'autoload')) {
+					mkdir (TEMP_CACHE_PATH.'autoload', 0777, true);
 				}
 				file_put_contents($file, $content);
 			}
@@ -89,7 +89,7 @@ class RaptorAutoloader {
 		
 		if ($context) {
 			
-
+			
 			if (!isset (self::$filesModule[$context]) || $forceBuild) { // Si le cache est déjà chargé
 				
 				$file = TEMP_CACHE_PATH.'autoload/modules/autoload_'.$context.'.php';
@@ -105,7 +105,7 @@ class RaptorAutoloader {
 						mkdir (TEMP_CACHE_PATH.'autoload/modules', 0777, true);
 					}
 					
-					$classesDir = MODULES_PATH.$context.'/'.CLASSES_DIR.'/';
+					$classesDir = _ioClass ('RaptorModule')->getPath ($context).CLASSES_DIR.'/';
 					
 					self::$filesModule[$context] = array ();
 					
@@ -122,8 +122,8 @@ class RaptorAutoloader {
 					$content = '<?php $autoload = '.var_export (self::$filesModule[$context], true).';';
 					
 					// Génère les repertoire et le fichier
-					if (!file_exists(TEMP_CACHE_PATH)) {
-						mkdir (TEMP_CACHE_PATH, 0777, true);
+					if (!file_exists(TEMP_CACHE_PATH.'autoload/modules')) {
+						mkdir (TEMP_CACHE_PATH.'autoload/modules', 0777, true);
 					}
 					file_put_contents($file, $content);
 				}

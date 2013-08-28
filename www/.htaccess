@@ -1,1 +1,1 @@
-ErrorDocument 404 /meditor/index.php?controller=default&action=404
+ErrorDocument 404 /index.php?controller=default&action=404

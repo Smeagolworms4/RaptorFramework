@@ -92,8 +92,11 @@ class RaptorController {
 	 * @return bool
 	 */
 	private function _controllerExist () {
-		$fileController = MODULES_PATH.$this->_module.'/'.CONTROLLER_DIR.'/'.$this->_controller.'.controller.php';
-		
+		$module = _ioClass ('RaptorModule');
+		if (!$module->exist ($this->_module)) {
+			return false;
+		}
+		$fileController = $module->getPath ($this->_module).CONTROLLER_DIR.'/'.$this->_controller.'.controller.php';
 		return file_exists($fileController);
 	}
 	
@@ -101,13 +104,12 @@ class RaptorController {
 	 * Execute l'action du controller
 	 */
 	public function process () {
-		
 		if ($this->_controllerExist ()) {
-			
 			_ioClass('RaptorContext')->push($this->_module);
+			$module = _ioClass ('RaptorModule');
 			
 			// Construction du controller
-			require_once (MODULES_PATH.$this->_module.'/'.CONTROLLER_DIR.'/'.$this->_controller.'.controller.php');
+			require_once ($module->getPath ($this->_module).CONTROLLER_DIR.'/'.$this->_controller.'.controller.php');
 			$controller = _iOClass ($this->_controller.'ActionController');
 			
 			$auroundController = $this->getAuroundController ();
