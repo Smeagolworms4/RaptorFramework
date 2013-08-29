@@ -12,6 +12,7 @@ class RaptorActionReturnJSON extends RaptorActionReturn {
 	public function fetch () {
 		$ppo     = $this->_getPPO ();
 		$tpl     = new RaptorTpl ($ppo);
+		header('Content-type: application/json');
 		return $tpl->json ();
 	}
 	
