@@ -22,7 +22,7 @@ class RaptorInstall {
 	 * @return bool Installation réussie
 	 */
 	private function _installHtaccess() {
-		$ppo = new RaptorPPO ();
+		$ppo = new PPO ();
 		$tpl = new RaptorTpl ($ppo);
 		$ppo->rootUrl = _iOClass ('RaptorUrl')->getRacineUrl ();
 		
@@ -41,7 +41,7 @@ class RaptorInstall {
 	private function _installDB() {
 		
 		$config = _ioClass ('RaptorConfig');
-		$ppo    = new RaptorPPO ();
+		$ppo    = new PPO ();
 		$tpl    = new RaptorTpl ($ppo);
 		$ppo->prefixe = $config->dataTablePrefixe;
 		

@@ -1,1 +1,1 @@
-ErrorDocument 404 /index.php?module=default&controller=default&action=404
+ErrorDocument 404 /picross/index.php?module=default&controller=default&action=404

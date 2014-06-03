@@ -1,6 +1,8 @@
 <?php
 
-class RaptorAutoloader {
+namespace Raptor;
+
+class Autoloader {
 
 	/**
 	 * Liste des fichiers de class
@@ -55,7 +57,7 @@ class RaptorAutoloader {
 					if ($d) {
 						while (false !== ($entry = $d->read())) {
 							if (!is_dir ($path.$entry) && strpos($entry, '.class.php') !== false) {
-								self::$files[str_replace('.class.php', '', $entry)] = $path.'/'.$entry;
+								self::$files["Raptor\\".str_replace('.class.php', '', $entry)] = $path.'/'.$entry;
 							}
 						}
 					}
@@ -146,5 +148,5 @@ class RaptorAutoloader {
 	}
 }
 
-spl_autoload_register(array ('RaptorAutoloader', 'autoloadCore'));
-spl_autoload_register(array ('RaptorAutoloader', 'autoloadModule'));
+spl_autoload_register(array ('Raptor\\Autoloader', 'autoloadModule'));
+spl_autoload_register(array ('Raptor\\Autoloader', 'autoloadCore'));

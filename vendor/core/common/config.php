@@ -1,3 +1,3 @@
 <?php
-$config = _ioClass ('RaptorConfig');
+$config = _service ('Config');
 $config->loadWorkspaceConfig ();

@@ -11,23 +11,13 @@ function _request ($name, $defaultValue = NULL) {
 }
 
 /**
- * Crée une nouvelle instance de l'objet
- * @param string $className
- * @param mixed  ...
- * @return mixed
- */
-function _class () {
-	return call_user_func_array('RaptorClassFactory::get', func_get_args ());
-}
-
-/**
  * Crée our écupère la dernière instance de l'objet
  * @param string $className
  * @param mixed  ...
  * @return mixed
  */
-function _iOClass () {
-	return call_user_func_array('RaptorClassFactory::iOGet', func_get_args ());
+function _service () {
+	return call_user_func_array('Raptor\\ServiceFactory::iOGet', func_get_args ());
 }
 
 /**
@@ -35,12 +25,12 @@ function _iOClass () {
  * @return RaptorActionReturnNone
  */
 function _arNone () {
-	return new RaptorActionReturnNone ();
+	return new Raptor\ActionReturnNone ();
 }
 
 /**
  * Retour d'action avec telmplate smarty et template principale de la page
- * @param RaptorPPO $ppo
+ * @param PPO $ppo
  *                  - $ppo->MAIN_TEMPLATE  = Adresse du template principal
  *                  - $ppo->TITLE_PAGE     = Titre de la page
  *                  - $ppo->SUB_TITLE_PAGE = Sous titre de la page
@@ -48,12 +38,12 @@ function _arNone () {
  * @return RaptorActionReturnSmarty
  */
 function _arSmarty ($ppo, $pathTpl) {
-	return new RaptorActionReturnSmarty ($ppo, $pathTpl);
+	return new Raptor\ActionReturnSmarty ($ppo, $pathTpl);
 }
 
 /**
  * Retour d'action avec telmplate smarty sans template principale
- * @param RaptorPPO $ppo
+ * @param PPO $ppo
  * @param string    $pathTpl Adresse du template smarty
  * @return RaptorActionReturnDirectSmarty
  */
@@ -71,7 +61,7 @@ function _arRedirect ($url) {
 
 /**
  * Retour d'action json
- * @param RaptorPPO $ppo
+ * @param PPO $ppo
  * @return RaptorActionJSON
  */
 function _arJSON ($ppo) {
@@ -163,7 +153,7 @@ function _query ($sql, $params = array (), $dbname = NULL) {
  * @return RaptorDAO
  */
 function _dao ($tablename, $jointures = array (), $connectionName = NULL) {
-	return RaptorDAO::getInstance ($tablename, $jointures);
+	return Raptor\DAO::getInstance ($tablename, $jointures);
 }
 
 /**
@@ -172,7 +162,7 @@ function _dao ($tablename, $jointures = array (), $connectionName = NULL) {
  * @return RaptorDAOSearchParams
  */
 function _daoSP ($kind = RaptorDAO::KIND_AND) {
-	return new RaptorDAOSearchParams ($kind);
+	return new Raptor\DAOSearchParams ($kind);
 }
 
 /**
@@ -180,7 +170,7 @@ function _daoSP ($kind = RaptorDAO::KIND_AND) {
  * @return string
  */
 function _currentContext () {
-	return _ioClass('RaptorContext')->getCurrent ();
+	return _service('Context')->getCurrent ();
 }
 
 /**
@@ -190,7 +180,7 @@ function _currentContext () {
  * @return stdClass
  */
 function _record ($tablename, $connectionName = NULL) {
-	return RaptorDAO::getInstance ($tablename, array (), $connectionName)->getRecord ();
+	return Raptor\DAO::getInstance ($tablename, array (), $connectionName)->getRecord ();
 }
 
 /**
@@ -202,7 +192,7 @@ function _record ($tablename, $connectionName = NULL) {
  * @return mixed
  */
 function _sessionGet ($var, $defaultValue = NULL, $namespace = RaptorSession::DEFAULT_NAMESPACE) {
-	return RaptorSession::get ($var, $defaultValue, $namespace);
+	return Raptor\Session::get ($var, $defaultValue, $namespace);
 }
 
 /**
@@ -213,5 +203,5 @@ function _sessionGet ($var, $defaultValue = NULL, $namespace = RaptorSession::DE
  * @param string $namespace Namespace dans lequel on veut placer la variable
  */
 function _sessionSet ($var, $value, $namespace = RaptorSession::DEFAULT_NAMESPACE) {
-	return RaptorSession::set ($var, $value, $namespace);
+	return Raptor\Session::set ($var, $value, $namespace);
 }

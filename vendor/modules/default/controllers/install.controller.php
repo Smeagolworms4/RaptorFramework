@@ -2,7 +2,7 @@
 /**
  * Page par default
  **/
-class InstallActionController extends RaptorActionController {
+class InstallActionController extends ActionController {
 	
 	public function beforeAction($actionName) {
 		
@@ -13,7 +13,7 @@ class InstallActionController extends RaptorActionController {
 		}
 		
 		
-		if ($config->MODE != RaptorConfig::MODE_DEV) {
+		if ($config->MODE != Config::MODE_DEV) {
 			throw new RaptorException (__('Le framework doit être en mode DEV pour l\'installation'));
 		}
 	}
@@ -31,11 +31,11 @@ class InstallActionController extends RaptorActionController {
 	 */
 	protected function processStep1 () {
 		
-		if (file_exists(RaptorConfig::$WORKSPACE_CONFIG_FILE)) {
+		if (file_exists(Config::$WORKSPACE_CONFIG_FILE)) {
 			return _arRedirect(_url ('||step3'));
 		}
 		
-		$ppo = new RaptorPPO ();
+		$ppo = new PPO ();
 		$tpl = new RaptorTpl($ppo);
 		
 		$ppo->configFile = "<?php\n\n".$tpl->smarty('install/config.php.tpl');
@@ -56,7 +56,7 @@ class InstallActionController extends RaptorActionController {
 			mkdir (WORKSPACE_PATH, 0777, true);
 		}
 		
-		file_put_contents(RaptorConfig::$WORKSPACE_CONFIG_FILE, $config_file);
+		file_put_contents(Config::$WORKSPACE_CONFIG_FILE, $config_file);
 		
 		return $this->processStep3();
 	}
@@ -67,7 +67,7 @@ class InstallActionController extends RaptorActionController {
 	 */
 	protected function processStep3 () {
 		
- 		$ppo = new RaptorPPO ();
+ 		$ppo = new PPO ();
  		$installer = new RaptorInstall ();
  		$ppo->installOk = $installer->install ();
 		return _arSmarty ($ppo, 'install/step3.tpl');

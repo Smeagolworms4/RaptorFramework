@@ -1,8 +1,11 @@
 <?php
+use Raptor\PPO;
+use Raptor\ActionController;
+
 /**
  * Page par default
  **/
-class DefaultActionController extends RaptorActionController {
+class DefaultActionController extends ActionController {
 	
 	/**
 	 * Page initial du framework
@@ -19,7 +22,7 @@ class DefaultActionController extends RaptorActionController {
 	 * @return RaptorActionReturn 
 	 */
 	protected function processWelcome () {
-		$ppo = new RaptorPPO ();
+		$ppo = new PPO ();
 		return _arSmarty($ppo, 'default|default/welcome.tpl');
 	}
 	
@@ -31,7 +34,7 @@ class DefaultActionController extends RaptorActionController {
 		
 		header("HTTP/1.0 404 Not Found");
 		
-		$ppo = new RaptorPPO ();
+		$ppo = new PPO ();
 		return _arSmarty($ppo, 'default|default/404.tpl');
 	}
 	
@@ -39,7 +42,7 @@ class DefaultActionController extends RaptorActionController {
 	 * Renvoie le contenu des fichiers ressource concaténés
 	 */
 	protected function processConcat () {
-		$ppo = new RaptorPPO ();
+		$ppo = new PPO ();
 		
 		if (_request('t', 'css') == 'css') {
 			header('Content-type: text/css');
