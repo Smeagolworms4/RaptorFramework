@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body, th, td {
+	font-size: 12px;
+	font-family: sans;
+}
+
+body {
+	background: url("../img/bg.jpg");
+}
+
+table, td, tr {
+	cellspacing:0;
+	border-collapse:collapse;
+	border-spacing:0;
+}
+table.table_picross {
+}
+
+table.table_picross td {
+	border: solid 1px #000;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+table.table_picross th.instruction_picross{
+	border: solid 1px #000;
+	width: 20px;
+	height: 20px;
+	text-align: right;
+}
+
+table.table_picross th.instruction_picross.horizontal {
+	width: 20px;
+	white-space: nowrap;
+}
+
+table.table_picross th.instruction_picross.vertical {
+	height: 20px;
+	vertical-align: bottom;
+}
+
+table.table_picross td.instruction_picross.empty {
+	border: none;
+}
+
+table.table_picross span.number_picross {
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	vertical-align: middle;
+	font-size: 16px;
+	text-align: center;
+}
+
+table.table_picross .horizontal span.number_picross {
+	width: 20px;
+}
+table.table_picross .vertical span.number_picross {
+	height: 20px;
+}
+
+table.table_picross .valid_picross {
+	height: 100%;
+	width: 100%;
+	background: #FFF;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+
+table.table_picross .horizontal .valid_picross {
+	width: 7px;
+	border-left: 1px solid #000;
+}
+table.table_picross .vertical .valid_picross {
+	height: 7px;
+	vertical-align: bottom;
+	border-top: 1px solid #000;
+}
+
+table.table_picross .valid_picross.valid {
+	background: #0F0;
+}
+table.table_picross .valid_picross.error {
+	background: #F00;
+}
+
+.panel_picross {
+	margin-top:10px;
+}
+
+.panel_picross div {
+	width: 20px;
+	height: 20px;
+	border: solid 2px #000;
+	margin-right: 5px;
+	display: inline-block;
+}
+
+.panel_picross div.selected_picross {
+	border: red 2px solid;
+}
+
+.selector_picross_selected {
+	background: yellow;
+	opacity:0.5;
+	cursor: pointer;
+}
+
+.apercu_picross {
+	border: 1px solid #000;
+}
+
+.apercu_picross tr td {
+	width: 8px;
+	height: 8px;
+	border: none;
+}
+
+.instruction_picross.empty {
+	text-align: right;
+	vertical-align: bottom;
+}
+
+.instruction_picross.empty .apercu_picross {
+	display: inline-block;
+	margin: 10px;
+}
+
+.instruction_picross.empty .apercu_picross td {
+	display: inline-block;
+}
+
+.instruction_picross.empty .apercu_picross tr {
+	display: block;
+	white-space: nowrap;
+}
+
+.metaimage_picross .panel_picross,
+.metaimage_picross .instruction_picross {
+	display: none;
+}
+
+.metaimage_picross .table_picross tr td {
+	width: 5px;
+	height: 5px;
+	border: none;
+}
+.metaimage_picross table.table_picross {
+	border: 1px solid #000;
+	margin: 0 -1px -1px 0;
+}
+
+.selected_grille_picross > table {
+	display: none;
+}
