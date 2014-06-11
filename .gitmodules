@@ -1,0 +1,6 @@
+[submodule "vendor/libs/annotations"]
+	path = vendor/libs/annotations
+	url = https://github.com/doctrine/annotations.git
+[submodule "vendor/libs/lexer"]
+	path = vendor/libs/lexer
+	url = https://github.com/doctrine/lexer.git

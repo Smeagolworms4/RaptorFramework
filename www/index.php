@@ -1,8 +1,7 @@
 <?php
 
-require_once ('../vendor/core/common/path.php');
-require_once ('../vendor/core/common/autoload.php');
-require_once ('../vendor/core/common/shortcuts.php');
-require_once ('../vendor/core/common/config.php');
+require_once ('../vendor/Raptor/common/path.php');
+require_once ('../vendor/Raptor/common/autoload.php');
+require_once ('../vendor/Raptor/common/config.php');
 $coord = _ioClass ('RaptorController');
 $coord->process ();

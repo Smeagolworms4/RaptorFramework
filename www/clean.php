@@ -1,5 +1,5 @@
 <?php 
-	require_once ('../vendor/core/common/path.php');
+	require_once ('../vendor/Raptor/common/path.php');
 
 	ini_set('display_errors', 1);
 	ini_set('log_errors', 1);
