@@ -10,9 +10,9 @@ use Doctrine\Common\Annotations\Annotation;
  */
 class Service {
 	
-	public $name = "dd";
+	public $name;
 	
-// 	public function __construct ($params) {
-// 		$this->name = $params["value"];
-// 	}
+	public function __construct ($params) {
+		$this->name = $params["value"];
+	}
 }

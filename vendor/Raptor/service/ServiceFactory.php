@@ -5,7 +5,9 @@ namespace Raptor\service;
 use Raptor\cache\annotation\Cache;
 use Raptor\cache\CacheLoader;
 use Raptor\io\Directory;
-use Doctrine\Common\Annotations\AnnotationReader;
+use Raptor\annotation\AnnotationReader;
+use Raptor\annotation\annotations\Service;
+// use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
  * Factory permettant de creer n'importe quel Objet
@@ -56,18 +58,14 @@ class ServiceFactory {
 					
 					if (class_exists($className)) {
 						$reader = new AnnotationReader();
-						$aService = $reader->getClassAnnotations (new \ReflectionClass($className));
-// 						$aService = $reader->getClassAnnotation (new \ReflectionClass($className), "Raptor\\annotation\\Service");
+						/* @var $aService Service */
+						$aService = $reader->getClassAnnotation (new \ReflectionClass($className), "Raptor\\annotation\\annotations\\Service");
+						if ($aService) {
+							self::$_services[$aService->name] = $className;
+						}
 					}
-
-					var_dump ("cool");
-// 					var_dump ($className);
-					var_dump ($aService);
-					var_dump ("cool");
 				}
 			}
-			
-			exit ();
 			
 			$cache->save();
 		}
@@ -87,9 +85,10 @@ class ServiceFactory {
 			throw new \Exception ("Service ".$service." not exist");
 		}
 		
-		self::$_instances[$className] = new $className ();
+		$className = $services[$service];
+		self::$_instances[$service] = new $className ();
 		
-		return self::$_instances[$className];
+		return self::$_instances[$service];
 	}
 	
 	/**

@@ -4,39 +4,8 @@ namespace Raptor\config;
 
 use Raptor\annotation\annotations\Service;
 
-// use Raptor\annotation\annotations\Service as Service2;
-// use Raptor\annotation\annotations\Service as Service3;
-// use Raptor\annotation\annotations\Service as Service4;
-// use Raptor\annotation\annotations\Service as Service5;
-
-// /**
-//  * Class PHP permettant de gérer la configuration
-//  * 
-//  * @example eded (de_èed_zà)
-//  * 
-//  * @ 
-//  * 
-//  * @ Service5
-//  * @Service4
-//  * @Service3
-//  * ()
-//  * @Service\MyClass5
-//  * @Service4 ( 
-//  *     Service4::COOL
-//  * );
-//  * @Service4 ( 
-//  *     @Service ("super")
-//  * );
-//  * @Service4 ( 
-//  *    self::COOOL
-//  * );
-//  * @Service3({},param1="ed\eeed",param2={});
-//  * @Service ( { }, param1="edd", param2 = Service4::COOL);
-//  * @Service2 ("con\"fig", param1='edd', param2 = {});
-//  */
-
  /**
- * @Service
+ * @Service ("config")
  * @author Damien Duboeuf
  */
 class Config {

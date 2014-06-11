@@ -1,9 +1,14 @@
 <?php
+
+namespace Raptor\controller;
+
+use Raptor\annotation\annotations\Service;
+
 /**
  * Class PHP permettant de gérer les différent controller du framework
- * 
+ * @Service ("controller")
  */
-class RaptorController {
+class Controller {
 
 	/**
 	 * @var string

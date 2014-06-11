@@ -1,7 +1,11 @@
 <?php
+namespace Raptor\module;
+
+use Raptor\annotation\annotations\Service;
+
 /**
  * Class le context courrant
- *
+ * @Service ("context")
  */
 class RaptorContext {
 	
