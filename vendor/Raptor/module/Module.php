@@ -1,10 +1,12 @@
 <?php
 
-namespace Raptor;
+namespace Raptor\module;
+
+use Raptor\annotation\annotations\Service;
 
 /**
  * Class le module courrant
- *
+ * @Service ("module")
  */
 class Module {
 	

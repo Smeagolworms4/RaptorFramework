@@ -1,6 +1,6 @@
 <?php 
 
-namespace Raptor;
+namespace Raptor\session;
 
 /**
  * Class permettant de gérer les sessions PHP

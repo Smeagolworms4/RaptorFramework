@@ -6,8 +6,6 @@ use Raptor\cache\annotation\Cache;
 use Raptor\cache\CacheLoader;
 use Raptor\io\Directory;
 use Raptor\annotation\AnnotationReader;
-use Raptor\annotation\annotations\Service;
-// use Doctrine\Common\Annotations\AnnotationReader;
 
 /**
  * Factory permettant de creer n'importe quel Objet
@@ -30,12 +28,12 @@ class ServiceFactory {
 	private static function _getClassName($src) {
 		
 		if (!preg_match('/\bnamespace\s+([^;]+);/s', $src, $match)) {
-			throw new \Exception (sprintf('Namespace could not be determined for file "%s".', $filename));
+			throw new \Exception (sprintf('Namespace could not be determined for file "%s".', $src));
 		}
 		$namespace = $match[1];
 	
 		if (!preg_match('/\bclass\s+([^\s]+)\s+(?:extends|implements|{)/s', $src, $match)) {
-			throw new \Exception(sprintf('Could not extract class name from file "%s".', $filename));
+			throw new \Exception(sprintf('Could not extract class name from file "%s".', $src));
 		}
 	
 		return $namespace.'\\'.$match[1];
@@ -58,7 +56,7 @@ class ServiceFactory {
 					
 					if (class_exists($className)) {
 						$reader = new AnnotationReader();
-						/* @var $aService Service */
+						/* @var $aService Raptor\annotation\annotations\Service */
 						$aService = $reader->getClassAnnotation (new \ReflectionClass($className), "Raptor\\annotation\\annotations\\Service");
 						if ($aService) {
 							self::$_services[$aService->name] = $className;

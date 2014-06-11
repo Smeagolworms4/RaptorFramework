@@ -150,9 +150,11 @@ class Autoloader {
 	 */
 	public static function autoloadLibs ($class, $forceBuild = false) {
 		
+		require_once __DIR__.'/Path.php';
+		
 		foreach (self::$libsPath as $path) {
 			
-			$filename = LIBS_PATH.$path."/".str_replace ("\\", "/", $class.".php");
+			$filename = Path::LIBS_PATH.$path."/".str_replace ("\\", "/", $class.".php");
 			
 // 			var_dump($filename);
 			
@@ -169,4 +171,4 @@ class Autoloader {
 
 // spl_autoload_register(array ('Raptor\\common\\Autoloader', 'autoloadRaptor'));
 spl_autoload_register(array ('Raptor\\common\\Autoloader', 'autoloadLibs'));
-spl_autoload_register(array ('Raptor\\common\\Autoloader', 'autoloadModule'));
+// spl_autoload_register(array ('Raptor\\common\\Autoloader', 'autoloadModule'));

@@ -12,7 +12,8 @@ class RaptorShortcut {
 	 * @return mixed
 	 */
 	public static function request ($name, $defaultValue = NULL) {
-		return RaptorRequest::get ($name, $defaultValue); 
+		$request = self::service ('request');
+		return $request->get ($name, $defaultValue); 
 	}
 	
 	/**

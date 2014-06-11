@@ -1,6 +1,6 @@
 <?php 
 
-namespace Raptor;
+namespace Raptor/ppo;
 
 /**
  * Class permettant de faire passer des datas à smarty de manière propre sans générer de notice
